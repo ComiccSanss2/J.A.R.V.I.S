@@ -1,0 +1,28 @@
+{
+  "name": "jarvis-os-desktop",
+  "version": "1.0.0",
+  "description": "J.A.R.V.I.S. OS - desktop client (Windows / macOS)",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win portable",
+    "dist:mac": "electron-builder --mac dmg"
+  },
+  "dependencies": {
+    "systeminformation": "^5.23.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "os.jarvis.desktop",
+    "productName": "JARVIS OS",
+    "files": ["main.js", "preload.js", "package.json"],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "extendInfo": { "NSMicrophoneUsageDescription": "J.A.R.V.I.S. listens for voice commands." }
+    }
+  }
+}

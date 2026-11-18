@@ -1,0 +1,37 @@
+{
+  "_info": "Webhooks and scripts J.A.R.V.I.S. may use. Set enabled=true to activate them. ${VAR} is replaced with the environment variable (.env).",
+  "webhooks": [
+    {
+      "name": "test_echo",
+      "description": "Test webhook: sends a payload to httpbin.org and returns the echo (useful to check the integration works).",
+      "url": "https://httpbin.org/post",
+      "method": "POST",
+      "enabled": true
+    },
+    {
+      "name": "living_room_lights",
+      "description": "Turns the living room lights on/off via Home Assistant. payload: {\"action\": \"on\"|\"off\"}",
+      "url": "${HOME_ASSISTANT_URL}/api/webhook/living_room_lights",
+      "method": "POST",
+      "headers": {"Authorization": "Bearer ${HOME_ASSISTANT_TOKEN}"},
+      "enabled": false
+    },
+    {
+      "name": "add_calendar_event",
+      "description": "Creates a calendar event (e.g. via Zapier/Make/n8n). payload: {\"title\", \"start\" ISO, \"duration_min\"}",
+      "url": "${CALENDAR_WEBHOOK_URL}",
+      "method": "POST",
+      "enabled": false
+    }
+  ],
+  "scripts": [
+    {
+      "name": "save_note",
+      "description": "Saves a text note to data/notes.txt on the server. argument = the note text.",
+      "command": ["{python}", "scripts/save_note.py"],
+      "accepts_argument": true,
+      "timeout": 10,
+      "enabled": true
+    }
+  ]
+}
